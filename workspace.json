@@ -1,0 +1,7 @@
+{
+  "version": 2,
+  "projects": {
+    "cryptostats": "apps/cryptostats",
+    "cryptostats-e2e": "apps/cryptostats-e2e"
+  }
+}
