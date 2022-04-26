@@ -1,8 +1,8 @@
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 
 import { createTheme, ThemeProvider } from '@mui/material';
+import { Routes } from '../routes/routes';
 import styles from './app.module.less';
-import LoginForm from './login-form/login-form';
 
 const darkTheme = createTheme({
   palette: {
@@ -12,7 +12,7 @@ const darkTheme = createTheme({
 )
 export function App() {
   return (<ThemeProvider theme={darkTheme}>
-    <LoginForm />
+    <Routes />
   </ThemeProvider>)
 
 }
