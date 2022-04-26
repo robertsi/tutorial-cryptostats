@@ -2,6 +2,7 @@
   "version": 2,
   "projects": {
     "cryptostats": "apps/cryptostats",
+    "cryptostats-backend": "apps/cryptostats-backend",
     "cryptostats-e2e": "apps/cryptostats-e2e"
   }
 }

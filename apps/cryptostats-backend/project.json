@@ -1,0 +1,52 @@
+{
+  "root": "apps/cryptostats-backend",
+  "sourceRoot": "apps/cryptostats-backend/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/node:webpack",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/apps/cryptostats-backend",
+        "main": "apps/cryptostats-backend/src/main.ts",
+        "tsConfig": "apps/cryptostats-backend/tsconfig.app.json",
+        "assets": ["apps/cryptostats-backend/src/assets"]
+      },
+      "configurations": {
+        "production": {
+          "optimization": true,
+          "extractLicenses": true,
+          "inspect": false,
+          "fileReplacements": [
+            {
+              "replace": "apps/cryptostats-backend/src/environments/environment.ts",
+              "with": "apps/cryptostats-backend/src/environments/environment.prod.ts"
+            }
+          ]
+        }
+      }
+    },
+    "serve": {
+      "executor": "@nrwl/node:node",
+      "options": {
+        "buildTarget": "cryptostats-backend:build"
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/cryptostats-backend/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/apps/cryptostats-backend"],
+      "options": {
+        "jestConfig": "apps/cryptostats-backend/jest.config.ts",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": []
+}
