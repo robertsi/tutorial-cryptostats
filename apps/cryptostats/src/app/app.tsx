@@ -1,14 +1,20 @@
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-import styles from './app.module.less';
-import NxWelcome from './nx-welcome';
 
+import { createTheme, ThemeProvider } from '@mui/material';
+import styles from './app.module.less';
+import LoginForm from './login-form/login-form';
+
+const darkTheme = createTheme({
+  palette: {
+    mode: "dark",
+  }
+}
+)
 export function App() {
-  return (
-    <>
-      <NxWelcome title="cryptostats" />
-      <div />
-    </>
-  );
+  return (<ThemeProvider theme={darkTheme}>
+    <LoginForm />
+  </ThemeProvider>)
+
 }
 
 export default App;
