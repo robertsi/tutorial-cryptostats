@@ -1,8 +1,11 @@
 {
   "version": 2,
   "projects": {
+    "api": "libs/api",
     "cryptostats": "apps/cryptostats",
     "cryptostats-backend": "apps/cryptostats-backend",
+    "cryptostats-backend-auth": "libs/cryptostats-backend/auth",
+    "cryptostats-backend-users": "libs/cryptostats-backend/users",
     "cryptostats-e2e": "apps/cryptostats-e2e"
   }
 }

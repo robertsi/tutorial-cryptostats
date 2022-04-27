@@ -1,0 +1,22 @@
+{
+  "root": "libs/cryptostats-backend/users",
+  "sourceRoot": "libs/cryptostats-backend/users/src",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["libs/cryptostats-backend/users/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/cryptostats-backend/users"],
+      "options": {
+        "jestConfig": "libs/cryptostats-backend/users/jest.config.ts",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": []
+}

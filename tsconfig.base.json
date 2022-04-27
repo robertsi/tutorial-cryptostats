@@ -14,7 +14,15 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@cryptostats/api": ["libs/api/src/index.ts"],
+      "@cryptostats/cryptostats-backend-auth": [
+        "libs/cryptostats-backend/auth/src/index.ts"
+      ],
+      "@cryptostats/cryptostats-backend-users": [
+        "libs/cryptostats-backend/users/src/index.ts"
+      ]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }
