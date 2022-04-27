@@ -19,6 +19,9 @@
       "@cryptostats/cryptostats-backend-auth": [
         "libs/cryptostats-backend/auth/src/index.ts"
       ],
+      "@cryptostats/cryptostats-backend-coinbase": [
+        "libs/cryptostats-backend/coinbase/src/index.ts"
+      ],
       "@cryptostats/cryptostats-backend-users": [
         "libs/cryptostats-backend/users/src/index.ts"
       ]

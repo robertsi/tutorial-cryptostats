@@ -1,18 +1,18 @@
 ```
 nx g component login-form
 nx g component signup-form
-npm install @mui/material @emotion/react @emotion/styled
-npm install tailwindcss@latest postcss@latest autoprefixer@latest
+npm i @mui/material @emotion/react @emotion/styled
+npm i tailwindcss@latest postcss@latest autoprefixer@latest
 cd apps/cryptostats
 npx tailwindcss init -p
-npm install react-router react-router-dom
+npm i react-router react-router-dom
 cd -
-npm install -D @nrwl/nest
+npm i -D @nrwl/nest
 nx list @nrwl/nest
 nx g @nrwl/nest:app --help 
 nx g @nrwl/nest:app cryptostats-backend --frontendProject cryptostats
-npm install @nestjs/mongoose mongoose
-npm install @nestjs/config
+npm i @nestjs/mongoose mongoose
+npm i @nestjs/config
 nx g @nrwl/nest:library users --controller --service
 nx g @nrwl/nest:library auth --controller --service
 @REM nx g @nrwl/nest:library users --directory=cryptostats-backend --controller --service
@@ -21,4 +21,10 @@ nx g @nrwl/workspace:move --destination=cryptostats-backend/auth --projectName=a
 npm i @nestjs/passport @nestjs/jwt passport passport-jwt passport-local 
 npm i -D @types/passport-jwt @types/passport-local 
 npm i bcrypt
+nx g @nrwl/react:redux authApi
+npm i cookie-parser
+npm i -D @types/cookie-parser
+npm i @nestjs/axios
+nx g @nrwl/nest:library coinbase --controller --service
+nx g @nrwl/workspace:move --destination=cryptostats-backend/coinbase --projectName=coinbase
 ```

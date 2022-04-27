@@ -1,7 +1,10 @@
-import styles from './login-form.module.less';
-import { Button, TextField, Link } from '@mui/material';
-import { Link as RouterLink } from "react-router-dom";
+import { User } from '@cryptostats/api';
+import { Button, Link, TextField } from '@mui/material';
 import { useState } from 'react';
+import { Link as RouterLink, useNavigate } from "react-router-dom";
+import { useLoginMutation } from '../../apis/auth.api';
+import { setAuthState } from '../../slices/auth.slice';
+import { useAppDispatch } from '../hooks';
 
 /* eslint-disable-next-line */
 export interface LoginFormProps { }
@@ -12,9 +15,21 @@ export function LoginForm(props: LoginFormProps) {
   const [password, setPassword] = useState("");
   const [passwordErrored, setPasswordErrored] = useState(false);
 
-  const handleLogin = () => {
+  const [login] = useLoginMutation();
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+
+  const handleLogin = async () => {
     setEmailErrored(!email ? true : false);
     setPasswordErrored(!password ? true : false);
+    try {
+      // const response = (await login({ email, password })) as { data: User };
+      const response = await login({ email, password }).unwrap();;
+      dispatch(setAuthState({ user: response }));
+      navigate("/");
+    } catch (err) {
+      console.error(err);
+    }
   }
 
   return (

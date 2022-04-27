@@ -1,0 +1,138 @@
+import {
+  createAsyncThunk,
+  createEntityAdapter,
+  createSelector,
+  createSlice,
+  EntityState,
+  PayloadAction,
+} from '@reduxjs/toolkit';
+
+export const AUTHAPI_FEATURE_KEY = 'authApi';
+
+/*
+ * Update these interfaces according to your requirements.
+ */
+export interface AuthApiEntity {
+  id: number;
+}
+
+export interface AuthApiState extends EntityState<AuthApiEntity> {
+  loadingStatus: 'not loaded' | 'loading' | 'loaded' | 'error';
+  error: string;
+}
+
+export const authApiAdapter = createEntityAdapter<AuthApiEntity>();
+
+/**
+ * Export an effect using createAsyncThunk from
+ * the Redux Toolkit: https://redux-toolkit.js.org/api/createAsyncThunk
+ *
+ * e.g.
+ * ```
+ * import React, { useEffect } from 'react';
+ * import { useDispatch } from 'react-redux';
+ *
+ * // ...
+ *
+ * const dispatch = useDispatch();
+ * useEffect(() => {
+ *   dispatch(fetchAuthApi())
+ * }, [dispatch]);
+ * ```
+ */
+export const fetchAuthApi = createAsyncThunk(
+  'authApi/fetchStatus',
+  async (_, thunkAPI) => {
+    /**
+     * Replace this with your custom fetch call.
+     * For example, `return myApi.getAuthApis()`;
+     * Right now we just return an empty array.
+     */
+    return Promise.resolve([]);
+  }
+);
+
+export const initialAuthApiState: AuthApiState = authApiAdapter.getInitialState(
+  {
+    loadingStatus: 'not loaded',
+    error: null,
+  }
+);
+
+export const authApiSlice = createSlice({
+  name: AUTHAPI_FEATURE_KEY,
+  initialState: initialAuthApiState,
+  reducers: {
+    add: authApiAdapter.addOne,
+    remove: authApiAdapter.removeOne,
+    // ...
+  },
+  extraReducers: (builder) => {
+    builder
+      .addCase(fetchAuthApi.pending, (state: AuthApiState) => {
+        state.loadingStatus = 'loading';
+      })
+      .addCase(
+        fetchAuthApi.fulfilled,
+        (state: AuthApiState, action: PayloadAction<AuthApiEntity[]>) => {
+          authApiAdapter.setAll(state, action.payload);
+          state.loadingStatus = 'loaded';
+        }
+      )
+      .addCase(fetchAuthApi.rejected, (state: AuthApiState, action) => {
+        state.loadingStatus = 'error';
+        state.error = action.error.message;
+      });
+  },
+});
+
+/*
+ * Export reducer for store configuration.
+ */
+export const authApiReducer = authApiSlice.reducer;
+
+/*
+ * Export action creators to be dispatched. For use with the `useDispatch` hook.
+ *
+ * e.g.
+ * ```
+ * import React, { useEffect } from 'react';
+ * import { useDispatch } from 'react-redux';
+ *
+ * // ...
+ *
+ * const dispatch = useDispatch();
+ * useEffect(() => {
+ *   dispatch(authApiActions.add({ id: 1 }))
+ * }, [dispatch]);
+ * ```
+ *
+ * See: https://react-redux.js.org/next/api/hooks#usedispatch
+ */
+export const authApiActions = authApiSlice.actions;
+
+/*
+ * Export selectors to query state. For use with the `useSelector` hook.
+ *
+ * e.g.
+ * ```
+ * import { useSelector } from 'react-redux';
+ *
+ * // ...
+ *
+ * const entities = useSelector(selectAllAuthApi);
+ * ```
+ *
+ * See: https://react-redux.js.org/next/api/hooks#useselector
+ */
+const { selectAll, selectEntities } = authApiAdapter.getSelectors();
+
+export const getAuthApiState = (rootState: unknown): AuthApiState =>
+  rootState[AUTHAPI_FEATURE_KEY];
+
+export const selectAllAuthApi = createSelector(getAuthApiState, selectAll);
+
+export const selectAuthApiEntities = createSelector(
+  getAuthApiState,
+  selectEntities
+);

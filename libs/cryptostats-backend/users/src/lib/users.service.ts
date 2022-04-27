@@ -6,8 +6,8 @@ import {
 } from '@nestjs/common';
 import { hash, compare } from 'bcrypt';
 import { CreateUserRequest } from '@cryptostats/api';
-import { UserResponse } from '../../../../api/src/lib/model/user/dto/response/user-response.dto';
-import { CoinbaseAuth } from './models/CoinbaseAuth';
+import { UserResponse } from '@cryptostats/api';
+import { CoinbaseAuth } from './models/CoinBaseAuth';
 import { User } from './models/User';
 import { UsersRepository } from './users.repository';
 

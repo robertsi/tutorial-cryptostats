@@ -4,8 +4,9 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { MongooseModule } from '@nestjs/mongoose';
 import { ConfigModule, ConfigService } from '@nestjs/config';
-import { UsersModule } from '@cryptostats/cryptostats-backend-users';
+import { UsersModule } from '@cryptostats/cryptostats-backend-users'; //import order seems to be importatn, coz of circular dependency
 import { AuthModule } from '@cryptostats/cryptostats-backend-auth';
+import { CoinbaseModule } from '@cryptostats/cryptostats-backend-coinbase';
 
 @Module({
   imports: [
@@ -19,6 +20,7 @@ import { AuthModule } from '@cryptostats/cryptostats-backend-auth';
     }),
     UsersModule,
     AuthModule,
+    CoinbaseModule,
   ],
   controllers: [AppController],
   providers: [AppService],

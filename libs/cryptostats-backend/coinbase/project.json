@@ -1,0 +1,22 @@
+{
+  "root": "libs/cryptostats-backend/coinbase",
+  "sourceRoot": "libs/cryptostats-backend/coinbase/src",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["libs/cryptostats-backend/coinbase/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/cryptostats-backend/coinbase"],
+      "options": {
+        "jestConfig": "libs/cryptostats-backend/coinbase/jest.config.ts",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": []
+}

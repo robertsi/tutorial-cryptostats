@@ -1,7 +1,10 @@
-import styles from './login-form.module.less';
-import { Button, TextField, Link } from '@mui/material';
-import { Link as RouterLink } from "react-router-dom";
+import { Button, Link, TextField } from '@mui/material';
 import { useState } from 'react';
+import { Link as RouterLink, useNavigate } from "react-router-dom";
+import { useLoginMutation } from '../../apis/auth.api';
+import { useCreateUserMutation } from '../../apis/users.api';
+import { setAuthState } from '../../slices/auth.slice';
+import { useAppDispatch } from '../hooks';
 
 /* eslint-disable-next-line */
 export interface SignupFormProps { }
@@ -13,9 +16,22 @@ export function SignupForm(props: SignupFormProps) {
   const [password, setPassword] = useState("");
   const [passwordErrored, setPasswordErrored] = useState(false);
 
-  const handleSignup = () => {
+  const [createUser] = useCreateUserMutation();
+  const [login] = useLoginMutation();
+  const navigate = useNavigate();
+  const dispatch = useAppDispatch();
+
+  const handleSignup = async () => {
     setEmailErrored(!email ? true : false);
     setPasswordErrored(!password ? true : false);
+    try {
+      await createUser({ email, password }).unwrap();
+      const response = await login({ email, password }).unwrap();
+      dispatch(setAuthState({ user: response }));
+      navigate("/");
+    } catch (err) {
+      console.error(err);
+    }
   }
   return (
     <div className="flex justify-center items-center flex-col h-screen gap-8">

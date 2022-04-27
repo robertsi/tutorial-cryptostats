@@ -1,6 +1,6 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document } from 'mongoose';
-import { CoinbaseAuth } from './CoinbaseAuth';
+import { CoinbaseAuth } from './CoinBaseAuth';
 
 @Schema({ versionKey: false })
 export class User extends Document {
